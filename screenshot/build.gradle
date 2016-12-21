@@ -1,0 +1,24 @@
+apply plugin: 'java'
+
+dependencies {
+    compile 'com.google.code.gson:gson:1.7.2'
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
+    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    compile 'org.imgscalr:imgscalr-lib:4.2'
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+// This is the actual solution, as in http://stackoverflow.com/a/19037807/1002054
+task clearJar(type: Delete) {
+    delete 'build/libs/myCompiledLibrary.jar'
+}
+
+task makeJar(type: Copy) {
+    from('build/bundles/release/')
+    into('build/libs/')
+    include('classes.jar')
+    rename ('classes.jar', 'myCompiledLibrary.jar')
+}
+
+makeJar.dependsOn(clearJar, build)
