@@ -15,6 +15,7 @@ import java.util.Arrays;
 public class State {
   public double[] xy = new double[2];
   public int bri;
+  public boolean on = true;
 
   public State(double x, double y, int bri) {
     xy[0] = x;
@@ -27,6 +28,7 @@ public class State {
     return "State{" +
         "xy=" + Arrays.toString(xy) +
         ", bri=" + bri +
+        ", on =" + on +
         '}';
   }
 }
